@@ -1,9 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView		
-from .models import Ingredient
+from .models import Ingredient,Meal,Review
 
 # Create your views here.
+
+class MealView(DetailView):
+    model = Meal
+    template_name = 'meal.html'
+
+class ReviewView(DetailView):
+    model = Review
+    template_name = 'review.html'
 
 class IngredientView(DetailView):
   model = Ingredient
