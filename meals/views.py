@@ -31,8 +31,10 @@ class IngredientView(DetailView):
 
 def show_user_home(request,pk):
     meals = Meal.objects.filter(host__id=pk)
+    # TODO rather than the reviews, show links to the attended meals --> how to queryset this?
+    reviews = Review.objects.filter(user__id=pk)
     host = User.objects.get(pk=pk)
-    context = {'host':host,'meals':meals}
+    context = {'host':host,'meals':meals,'reviews':reviews}
     return render(request,'user.html',context)
 
 def show_index(request,meal_id):

@@ -1,6 +1,16 @@
-You are logged in as {{ host.username }}
+Hello {{ host.username }} <br/>
+Meals you hosted:
 <ul>
 {% for m in meals %} 
-    <li> {{m}} </li>
+    <li> 
+    <a href="{{m.get_absolute_url}}">{{m}}</a> </li>
 {% endfor %}
 </ul>
+Meals you attended:
+<ul>
+{% for m in reviews %} 
+    <li> 
+    <a href="{{m.get_absolute_url}}">{{m}}</a> </li>
+{% endfor %}
+</ul>
+
