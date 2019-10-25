@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView,ListView		
+from django.contrib.auth.models import User
 from .models import Ingredient,Meal,Review
 
 # Create your views here.
@@ -28,6 +29,11 @@ class IngredientView(DetailView):
   #def get(self):
   #  return HttpResponse('hello world')
 
+def show_user_home(request,pk):
+    meals = Meal.objects.filter(host__id=pk)
+    host = User.objects.get(pk=pk)
+    context = {'host':host,'meals':meals}
+    return render(request,'user.html',context)
 
 def show_index(request,meal_id):
 	# return HttpResponse("Hello, {}. You are at the meals index!".format(request.GET.get('name')))
