@@ -1,14 +1,14 @@
 Hello {{ host.username }} <br/>
 Meals you hosted:
 <ul>
-{% for m in meals %} 
+{% for m in meals_hosted %} 
     <li> 
     <a href="{{m.get_absolute_url}}">{{m}}</a> </li>
 {% endfor %}
 </ul>
 Meals you attended:
 <ul>
-{% for m in reviews %} 
+{% for m in meals_reviewed %} 
     <li> 
     <a href="{{m.get_absolute_url}}">{{m}}</a> </li>
 {% endfor %}
