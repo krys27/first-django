@@ -1,16 +1,20 @@
-Hello {{ host.username }} <br/>
-Meals you hosted:
+{% extends "base.html" %}
+
+{% block title %}User  {{ host.username }}{% endblock %}
+
+{% block content %}
+<h1>Meals you hosted: </h1>
 <ul>
 {% for m in meals_hosted %} 
     <li> 
     <a href="{{m.get_absolute_url}}">{{m}}</a> </li>
 {% endfor %}
 </ul>
-Meals you attended:
+<h1>Meals you attended: </h1>
 <ul>
 {% for m in meals_reviewed %} 
     <li> 
     <a href="{{m.get_absolute_url}}">{{m}}</a> </li>
 {% endfor %}
 </ul>
-
+{% endblock %}
