@@ -3,6 +3,7 @@
 {% block title %}User  {{ host.username }}{% endblock %}
 
 {% block content %}
+{{ perms }}
 <h1>Meals you hosted: </h1>
 <ul>
 {% for m in meals_hosted %} 
@@ -17,4 +18,5 @@
     <a href="{{m.get_absolute_url}}">{{m}}</a> </li>
 {% endfor %}
 </ul>
+<p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
 {% endblock %}

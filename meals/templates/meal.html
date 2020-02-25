@@ -1,5 +1,10 @@
 <p> Meal {{ object.title }} </p>
 <p> Hosted by {{ object.host }} </p>
 
+<h1> Reviews </h1>
+<ul>
+{% for review in review_list %}
+    <li> {{ review }} </li> 
+{% endfor %}
+</ul>
 
-{# TODO Show the reviews of those who attended #}
