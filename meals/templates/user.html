@@ -3,7 +3,7 @@
 {% block title %}User  {{ host.username }}{% endblock %}
 
 {% block content %}
-{{ perms }}
+<h1> Hi, {{host.username}} </h1>
 <h1>Meals you hosted: </h1>
 <ul>
 {% for m in meals_hosted %} 

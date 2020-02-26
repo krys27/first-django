@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %} My posted reviews {% endblock %}
+
+{% block content %}
+<ul>
+{% for review in object_list %}
+    <li> {{ review }} </li> 
+{% endfor %}
+</ul>
+{% endblock %}

@@ -26,6 +26,14 @@ class MealListView(ListView):
     model = Meal
     template_name = 'meal_list.html'
 
+class PostedReviewsView(LoginRequiredMixin,ListView):
+    model = Review
+    template_name = 'review_list.html'
+    context_object_name = 'reviews_posted_by_user'
+    
+    #def get_queryset(self):
+    #    return Review.objects.filter(user__id=self.request.user.id)
+
 class ReviewView(DetailView):
     model = Review
     template_name = 'review.html'
