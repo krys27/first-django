@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.views.generic import DetailView,ListView		
 from django.contrib.auth.models import User
 from .models import Ingredient,Meal,Review
-from .forms import WriteReviewForm
+from .forms import ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
@@ -68,18 +68,22 @@ def show_template(request):
 def write_review(request,pk):
     meal = get_object_or_404(Meal,pk=pk)
     if request.method == 'POST':
-        form = WriteReviewForm(request.POST)
+        form = ReviewForm(request.POST)
         if form.is_valid():
-            Review.objects.create(meal=meal,user=request.id,text=form.cleaned_data['review'])
-            #new_review = Review(meal=meal,user=request.id,text=form.cleaned_data['review']
+            new_review = form.save(commit=False)
+            new_review.meal = meal
+            new_review.user = request.user
+            #Review.objects.create(meal=meal.id,user=request.id,text=form.cleaned_data['review'])
+            #new_review = Review(meal=meal,user=request.user,text=form.cleaned_data['review'])
+            print (new_review.text+'\n')
             #meal.guests.add(
-	    #new_review.save()
+            new_review.save()
 
-        return HttpResponseRedirect(reverse('meal_detail', args=[str(meal.id)]))
+            return HttpResponseRedirect(reverse('meal_detail', args=[str(meal.id)]))
 
     else:
-        proposed_text = 'to be written yet..'
-        form = WriteReviewForm(initial={'review':proposed_text})
-        context = {'form':form,'meal':meal}
-        return render(request,'write_review.html',context)
+        #proposed_text = 'to be written yet..'
+        form = ReviewForm()#initial={'text':proposed_text})
+    context = {'form':form,'meal':meal}
+    return render(request,'write_review.html',context)
 
